@@ -24,9 +24,15 @@ j play_end
 
 first_if_else:
 bne $s4, $s6, second_if_else #if (board[row][column] == -2)
+move $a0, $s0
+move $a1, $s1
+move $a2, $s2
 jal countAdjacentBombs
 sw $v1, 0 ($s3) #int x = countAdjacentBombs(board, row, column); board[row][column] = x;
 bne $v1, $zero, second_if_else
+move $a0, $s0
+move $a1, $s1
+move $a2, $s2
 jal revealAdjacentCells
 
 second_if_else:
