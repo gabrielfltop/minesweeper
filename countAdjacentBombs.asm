@@ -42,7 +42,7 @@ countAdjacentBombs:
   end_for_j_it:
   addi $s1, $s1, 1 #i++
   j begin_for_i_it
-  end_for_i_it
+  end_for_i_it:
   move $v1, $s3
   restore_context
   jr $ra

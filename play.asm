@@ -33,7 +33,7 @@ bne $v1, $zero, second_if_else
 move $a0, $s0
 move $a1, $s1
 move $a2, $s2
-jal revealAdjacentCells
+jal revealNeighboringCells
 
 second_if_else:
 li $s7, 1
