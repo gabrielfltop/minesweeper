@@ -5,15 +5,15 @@
 revealNeighboringCells:
 	save_context
 	move $s0, $a0
-	move $s1, $a1
-	move $s2, $a2
+	move $t3, $a1
+	move $t4, $a2
 	
 	
 	
-	addi $s1, $s1, -1 # row - 1
-	addi $s2, $s1, 2 # row + 1
-	addi $s3, $s2, -1 # column - 1
-	addi $s4, $s2, 1 # column + 1
+	addi $s1, $t3, -1 # row - 1
+	addi $s2, $t3, 1 # row + 1
+	addi $s3, $t4, -1 # column - 1
+	addi $s4, $t4, 1 # column + 1
 	
 	li $s5, SIZE
 	
