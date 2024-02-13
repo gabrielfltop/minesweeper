@@ -41,12 +41,10 @@ revealNeighboringCells:
 	move $a1, $s1
 	move $a2, $s3
 	jal countAdjacentBombs
-	  
-	move $s6, $v1
 	
-	sw $s6, 0 ($s5)
+	sw $v1, 0 ($s5)
 	
-	bne $s6, $zero, end_if
+	bnez $s6, end_if
 	
 	move $a0, $s0
 	move $a1, $s1

@@ -5,10 +5,8 @@
 countAdjacentBombs:
 	save_context
 	move $s0, $a0
-	move $s1, $a1
-	move $s2, $a2
-	move $t1, $s1
-	move $t2, $s2
+	move $t1, $a1
+	move $t2, $a2
 	addi $s1, $t1, -1 #row - 1
 	addi $s2, $t1, 1 #row + 1
 	addi $s3, $t2, -1 #column - 1
@@ -43,6 +41,6 @@ countAdjacentBombs:
   addi $s1, $s1, 1 #i++
   j begin_for_i_it
   end_for_i_it:
-  move $v1, $s3
+  move $v1, $s5
   restore_context
   jr $ra
