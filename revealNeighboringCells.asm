@@ -5,17 +5,17 @@
 revealNeighboringCells:
 	save_context
 	move $s0, $a0
-	move $t3, $a1
-	move $t4, $a2
+	move $t1, $a1
+	move $t2, $a2
 	
 	
 	
-	addi $s1, $t3, -1 # row - 1
-	addi $s2, $t3, 1 # row + 1
-	addi $s3, $t4, -1 # column - 1
-	addi $s4, $t4, 1 # column + 1
+	addi $s1, $t1, -1 # row - 1
+	addi $s2, $t1, 1 # row + 1
+	addi $s3, $t2, -1 # column - 1
+	addi $s4, $t2, 1 # column + 1
 	
-	li $s5, SIZE
+	li $t0, SIZE
 	
 	begin_for_i_it:				# for (int i = row - 1; i <= row + 1; ++i) {
   	bgt $s1, $s2, end_for_i_it
@@ -24,29 +24,29 @@ revealNeighboringCells:
   	bgt $s3, $s4, end_for_j_it
   	
   	blt $s1, $zero, end_if
-  	bge $s1, $s5, end_if
+  	bge $s1, $t0, end_if
   	blt $s3, $zero, end_if
-  	bge $s3, $s5, end_if
+  	bge $s3, $t0, end_if
   	
-  	sll $t0, $s1, 5
-	sll $t1, $s3, 2
-	add $t2, $t0, $t1
-	add $s6, $t2, $s0
-	lw $t2, 0 ($s6)
-	li $t0, -2
+  	sll $t3, $s1, 5
+	sll $t4, $s3, 2
+	add $t5, $t3, $t4
+	add $s5, $t5, $s0
+	lw $t5, 0 ($s5)
+	li $t6, -2
 	
-	bne $t2, $t0, end_if
+	bne $t5, $t6, end_if
 	
 	move $a0, $s0
 	move $a1, $s1
 	move $a2, $s3
 	jal countAdjacentBombs
 	  
-	move $s7, $v1
+	move $s6, $v1
 	
-	sw $s7, 0 ($s6)
+	sw $s6, 0 ($s5)
 	
-	bne $s7, $zero, end_if
+	bne $s6, $zero, end_if
 	
 	move $a0, $s0
 	move $a1, $s1
