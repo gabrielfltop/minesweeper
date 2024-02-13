@@ -6,50 +6,50 @@ checkVictory:
 	save_context
 	move $s0, $a0
 
-	li $t0, 0
-	li $t1, 0 # i = 0
-	li $t2, SIZE
+	li $s1, 0 # int count = 0
+	li $t0, SIZE
+	li $t1, BOMB_COUNT
+	li $t2, 0 # i = 0
 	li $t3, 0 # j = 0
-	li $t4, SIZE
 	
 	begin_for_i_it:				# for (int i = 0; i < SIZE; ++i) {
-  	bge $t1, $t2, end_for_i_it
+  	bge $t2, $t0, end_for_i_it
   
-	begin_for_j_it:				# for (int j = 0; j <= SIZE; ++j) {
-  	bgt $t3, $t4, end_for_j_it
+	begin_for_j_it:				# for (int j = 0; j < SIZE; ++j) {
+  	bge $t3, $t0, end_for_j_it
 	
-	sll $t5, $t1, 5
-	sll $t6, $t3, 2
-	add $t7, $t5, $t6
-	add $t5, $t7, $s0
-	lw $t7, 0 ($t5)
+	sll $t4, $t2, 5
+	sll $t5, $t3, 2
+	add $t6, $t4, $t5
+	add $t7, $t6, $s0
+	lw $t6, 0 ($t7)
 	
-	blt $t7, $zero, end_if # if(board[i][j] >= 0){
+	blt $t6, $zero, end_if_1 # if(board[i][j] >= 0){
 	
-	addi $t0, $t0, 1 # count++;
+	addi $s1, $s1, 1 # count++;
 	
-	end_if:
+	end_if_1:
 	
 	addi $t3, $t3, 1 # j++;
   	j begin_for_j_it
   	
   	end_for_j_it:
-  	addi $t1, $t1, 1 # i++;
+  	addi $t2, $t2, 1 # i++;
   	j begin_for_i_it
   	
   	end_for_i_it:
   	
-  	sll $t5, $t2, 3
-  	addi $t6, $t5, -10
+  	mul $t4, $t0, $t0
+  	sub $t7, $t4, $t1
   	
-  	bge $t0, $t6, else
+  	bge $s1, $t7, else
   	
-  	move $v1, $zero
+  	li $v0, 0
   	j end_if_2
   	
   	else:
   	
-  	li $v1, 1
+  	li $v0, 1
   	
   	end_if_2:
   	
