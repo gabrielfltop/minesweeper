@@ -7,28 +7,29 @@ countAdjacentBombs:
 	move $s0, $a0
 	move $t1, $a1
 	move $t2, $a2
-	addi $s1, $t1, -1 #row - 1
-	addi $s2, $t1, 1 #row + 1
-	addi $s3, $t2, -1 #column - 1
-	addi $s4, $t2, 1 #column + 1
-	li $s5 , 0 #count = 0
 	
+	li $s5 , 0 #count = 0
+
+  addi $s1, $t1, -1 #row - 1	
+  addi $s2, $t1, 1 #row + 1	
   begin_for_i_it:				# for (int i = row - 1; i <= row + 1; ++i) {
   bgt $s1,$s2,end_for_i_it
   
+  addi $s3, $t2, -1 #column - 1
+  addi $s4, $t2, 1 #column + 1
   begin_for_j_it:				# for (int j = column - 1; j <= column + 1; ++j) {
   bgt $s3,$s4,end_for_j_it
   
   li $t0, SIZE
-  blt $s1, $zero, else_invalid                  # if (i >= 0 && i < SIZE && j >= 0 && j < SIZE && board[i][j] == -1)
+  bltz $s1, else_invalid                  # if (i >= 0 && i < SIZE && j >= 0 && j < SIZE && board[i][j] == -1)
   bge $s1, $t0, else_invalid
-  blt $s3, $zero, else_invalid
+  bltz $s3, else_invalid
   bge $s3, $t0, else_invalid
-  	sll $t1, $s1, 5
-	sll $t2, $s3, 2
-	add $t3, $t1, $t2
-	add $t4, $t3, $s0
-	lw  $t5, 0 ($t4)
+  	sll $t3, $s1, 5
+	sll $t4, $s3, 2
+	add $t5, $t3, $t4
+	add $t6, $t5, $s0
+	lw  $t5, 0 ($t6)
 	li $t6, -1
   bne $t5, $t6, else_invalid
 
